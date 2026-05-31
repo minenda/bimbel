@@ -1,0 +1,276 @@
+ /* =========================
+   GLOBAL
+========================= */
+    body{
+      background:#f5f6fa;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .top-header{
+      background:#0d6efd;
+      color:white;
+      border-bottom-left-radius:30px;
+      border-bottom-right-radius:30px;
+      padding:20px;
+      padding-top:35px;
+    }
+
+    .logo-box{
+      width:70px;
+      height:70px;
+      background:white;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .logo-box img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+    
+      /* SEARCH */
+    .search-box{
+      background:#f1f3f7;
+      border-radius:18px;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      margin-top:20px;
+    }
+
+    .search-box input{
+      border:none;
+      background:transparent;
+      width:100%;
+      outline:none;
+      font-size:16px;
+      margin-left:10px;
+    }
+    
+    /* FILTER */
+    .filter-scroll{
+      overflow-x:auto;
+      white-space:nowrap;
+      padding-bottom:5px;
+    }
+
+    .filter-scroll::-webkit-scrollbar{
+      display:none;
+    }
+
+    .filter-btn{
+      border:none;
+      border-radius:16px;
+      padding:12px 22px;
+      font-weight:600;
+      margin-right:10px;
+      background:#f1f3f7;
+      color:#333;
+    }
+
+    .filter-primary{
+      background:#e9f2ff;
+      color:#0d6efd;
+    }
+
+    .filter-danger{
+      background:#ffecec;
+      color:#dc3545;
+    }
+    
+    /* STUDENT CARD */
+    .student-card{
+      background:white;
+      border-radius:22px;
+      padding:16px;
+      margin-bottom:18px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    .student-img{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+
+    .student-name{
+      font-size:22px;
+      font-weight:700;
+      margin-bottom:2px;
+    }
+
+    .student-course{
+      color:#555;
+      font-size:17px;
+      margin-bottom:2px;
+    }
+
+    .student-phone{
+      color:#777;
+      font-size:16px;
+    }
+
+    .price{
+      font-size:20px;
+      font-weight:700;
+      margin-top:12px;
+    }
+
+    .badge-payment{
+      border-radius:14px;
+      padding:10px 18px;
+      font-size:15px;
+      font-weight:700;
+      display:inline-block;
+      min-width:120px;
+      text-align:center;
+    }
+
+    .badge-unpaid{
+      background:#ffe9e9;
+      color:#dc3545;
+    }
+
+    .badge-paid{
+      background:#e6f8ec;
+      color:#1ca64c;
+    }
+    
+    @media(max-width:576px){
+
+      .student-name{
+        font-size:18px;
+      }
+
+      .student-course,
+      .student-phone{
+        font-size:14px;
+      }
+
+      .price{
+        font-size:17px;
+      }
+
+      .badge-payment{
+        font-size:13px;
+        min-width:100px;
+        padding:8px 14px;
+      }
+
+      .student-img{
+        width:60px;
+        height:60px;
+      }
+
+    }
+    
+
+    .summary-card{
+      background:white;
+      border-radius:25px;
+      padding:20px;
+      margin-top:-20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .mini-card{
+      border-radius:18px;
+      padding:18px 10px;
+      text-align:center;
+      font-weight:600;
+    }
+
+    .mini-card small{
+      display:block;
+      font-weight:500;
+      color:#777;
+      margin-bottom:5px;
+    }
+
+    .menu-card{
+      border-radius:22px;
+      padding:22px 15px;
+      background:white;
+      height:100%;
+      box-shadow:0 3px 10px rgba(0,0,0,0.03);
+      transition:0.2s;
+    }
+
+    .menu-card:hover{
+      transform:translateY(-2px);
+    }
+
+    .menu-icon{
+      font-size:34px;
+      margin-bottom:10px;
+    }
+
+    .menu-title{
+      font-weight:700;
+      font-size:20px;
+      margin-bottom:2px;
+    }
+
+    .menu-sub{
+      color:#777;
+      font-size:14px;
+      line-height:1.3;
+    }
+
+    .reminder-box{
+      background:white;
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 3px 10px rgba(0,0,0,0.03);
+    }
+
+    .bottom-nav{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      background:white;
+      border-top:1px solid #ddd;
+      padding:10px 0;
+      z-index:999;
+    }
+
+    .bottom-nav a{
+      text-decoration:none;
+      color:#999;
+      font-size:13px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .bottom-nav a.active{
+      color:#0d6efd;
+      font-weight:600;
+    }
+
+    .bottom-nav i{
+      font-size:22px;
+      margin-bottom:3px;
+    }
+
+    .content-space{
+      height:90px;
+    }
+    
+    
+.dataTables_filter{
+    margin-bottom:15px;
+}
+
+.dataTables_filter input{
+    border-radius:12px !important;
+    padding:10px 15px !important;
+    margin-left:10px !important;
+    min-width:250px;
+}

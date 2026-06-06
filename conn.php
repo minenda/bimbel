@@ -5,12 +5,13 @@
 	return $hasil;
     }
     **/
+    /**
 $db_host = "localhost";
 $db_user = "zunuzmy1_lasmin";
 $db_pass = "J%m2Y!^zs[*x";
 $db_name = "zunuzmy1_logistik";
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-/**
+**/
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "minenda";
@@ -18,7 +19,7 @@ $db_name = "db_gardenia";
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 //$koneksi = mysqli_connect("localhost","root","minenda","db_akuntansi");
 
-**/
+
 if(mysqli_connect_errno()){
 	echo 'Gagal melakukan koneksi ke Database : '.mysqli_connect_error();
 }   

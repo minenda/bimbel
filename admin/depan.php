@@ -49,7 +49,7 @@
 
       <h3 class="fw-bold">Ringkasan Hari Ini</h3>
       <div class="text-muted mb-4">
-        Rabu, 21 Mei 2026
+       <b><?php echo date('l',strtotime('Y m d'));?>, <?=date('d F Y');?></b>
       </div>
 
       <div class="row g-3">

@@ -16,9 +16,31 @@
    
    <!-- CSS Custom -->
   <link href="../assets/css/style.css" rel="stylesheet">
-
- 
 </head>
+<?php
+   if(isset($_POST['simpan'])){
+      $nama    = $_POST['nama'];
+      $wa      = $_POST['wa'];
+      $program = $_POST['program'];
+      $jk = $_POST['jk'];
+      $username = $_POST['username'];
+      $pass = $_POST['pass'];
+      $password = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+      $cek = mysqli_query($conn,"select username from tbl_siswa where username = '$username'");
+      if(mysqli_num_rows($cek) == 0){
+         $insert = mysqli_query($conn,"insert into tbl_siswa (nama, wa, program, jk, username, password, pass, status, level) values ('$nama', '$wa', '$program', '$jk', '$username', '$password', '$pass', '1', 'Siswa')");
+         if($insert){
+							echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data Siswa baru berhasil disimpan.</div>';
+						}else{
+							echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Ups, Data Barang Gagal Di simpan !</div>';
+						}
+						} else {
+						   echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Gagal disimpan. Gunakan Username lain!</div>';
+						}
+						
+     
+   }
+?>
 <body>
 
   <!-- HEADER -->
@@ -33,9 +55,70 @@
     </div>
   </a>
 
-  <div>
-        <i class="bi bi-plus-lg me-3"></i>
+      <div>
+        <i class="bi bi-plus-lg me-3" data-bs-toggle="modal" data-bs-target="#modalTambahSiswa" style="cursor:pointer"></i>
         <i class="bi bi-three-dots-vertical"></i>
+        <!-- Modal Tambah Siswa -->
+<div class="modal fade"
+     id="modalTambahSiswa"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">
+                    Tambah Siswa
+                </h5> 
+                <button type="button" class="btn-close" data-bs-dismiss="modal"> </button>
+            </div>
+            <form name="form1" id="form1" method="post" action="" enctype="multipart/form-data">
+            <div class="modal-body"> 
+                <div class="mb-3">
+                    <label class="form-label text-black"> Nama Siswa </label>
+                    <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama siswa">
+                </div> 
+                <div class="mb-3">
+                    <label class="form-label text-black">Nomor WhatsApp </label>
+                    <input type="text" name="wa" id="wa" class="form-control" placeholder="Mis. 62813xxxxxxxx">
+                </div> 
+                <div class="mb-3">
+                    <label class="form-label text-black">Lak-laki/Perempuan </label>
+                    <select type="text" name="jk" id="jk" class="form-control">
+                     <option value="">--Pilih--</option>
+                     <option value="L">Laki-laki</option>
+                     <option value="P">Perempuan</option>
+                    </select>
+                </div> 
+                <div class="mb-3">
+                    <label class="form-label text-black"> Program Bimbingan </label>
+                    <select name="program" id="program" class="form-select">
+                     <?php
+                        $query=mysqli_query($conn,"select * from tbl_program WHERE aktif = 'Y' order by nama_program ASC");
+                        while($row=mysqli_fetch_array($query)){?>
+                        <option value="<?=$row['id'];?>"><?=$row['nama_program'];?></option>
+                        <?php }?>
+                    </select>
+                </div>
+               <div class="mb-3">
+                    <label class="form-label text-black">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="">
+               </div> 
+               <div class="mb-3">
+                    <label class="form-label text-black">Password</label>
+                    <input type="pass" name="pass" id="password" class="form-control" placeholder="">
+                </div> 
+            </div>
+            
+            <div class="modal-footer"> 
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button> 
+                <button type="submit" name="simpan" id="simpan"  class="btn btn-primary"> Simpan </button> 
+            </div> 
+        </div>
+      </form>
+    </div>
+
+</div>
       </div>
 
     </div>
@@ -53,34 +136,15 @@
     </div>
 
     <!-- FILTER -->
-    <div class="filter-scroll mt-4">
-
-      <a href="?page=Home" class="btn filter-btn filter-primary">
-        Semua
-      </a>
-
-      <button class="filter-btn filter-danger">
-        Belum Bayar
-      </button>
-
-      <button class="filter-btn">
-        Lunas
-      </button>
-
-      <button class="filter-btn">
-        Aktif
-      </button>
-
-    </div>
+   
      <div class="card shadow mb-4">
 	
 		<div class="card-body">
     <div class="table">
       <table id="tableSiswa" class="table">  
-     
-      <thead><th>Daftar Siswa</th></thead>
+      <thead><th>Daftar Siswa Aktif</th></thead>
 <?php
-$query=mysqli_query($conn, "select * from tbl_siswa where level = 'Siswa' order by nama ASC");
+$query=mysqli_query($conn, "select tbl_siswa.*, tbl_program.*, tbl_siswa.id as id_siswa from tbl_siswa left join tbl_program on tbl_siswa.program = tbl_program.id where tbl_siswa.level = 'Siswa' order by nama ASC");
 while($row=mysqli_fetch_array($query)){
 ?>
     <!-- STUDENT LIST -->
@@ -105,7 +169,7 @@ while($row=mysqli_fetch_array($query)){
                 </div>
 
                 <div class="student-course">
-                  <?=$row['program'];?>
+                  <?=$row['nama_program'];?>
                 </div>
 
                 <div class="student-phone">
@@ -114,14 +178,12 @@ while($row=mysqli_fetch_array($query)){
               </div>
 				
               <div class="text-end">
-			  <a href="pembayaran.html" class="text-decoration-none">
+			  <a href="?page=viewDetail&id=<?=$row['id_siswa'];?>" class="text-decoration-none">
                 <div class="badge-payment badge-unpaid">
-                  Belum Bayar
+                  Lihat Detail
                 </div>
 				</a>
-                <div class="price">
-                  Rp300.000
-                </div>
+                
               </div>
 
             </div>
@@ -153,7 +215,7 @@ while($row=mysqli_fetch_array($query)){
 
 <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>
 
 <script>

@@ -443,7 +443,7 @@
                   Lunas
                 </div>
 
-                <div class="price">
+                <div class="badge-payment badge-paid">
                   Rp300.000
                 </div>
               </div>

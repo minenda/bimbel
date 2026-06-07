@@ -6,18 +6,17 @@
 
   <title>Data Siswa</title>
 
-  <!-- Bootstrap 5 -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../lib/css/datatables/dataTables.bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="../../lib/css/dataTables.bootstrap.css">
-   
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-   
-   <!-- CSS Custom -->
-  <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <?php
+   if(isset($_GET['edit'])){
+   $idEdit=$_GET['edit'];
+   $editStatus=mysqli_query($conn,"update tbl_siswa set status='2' where id = '$idEdit' ");
+   if($editStatus){
+      echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data Siswa  berhasil diUpdate.</div>';
+      } else {
+      echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data Siswa gagal diupdate.</div>';
+      }
+      }
    if(isset($_POST['simpan'])){
       $nama    = $_POST['nama'];
       $wa      = $_POST['wa'];
@@ -144,7 +143,7 @@
       <table id="tableSiswa" class="table">  
       <thead><th>Daftar Siswa Aktif</th></thead>
 <?php
-$query=mysqli_query($conn, "select tbl_siswa.*, tbl_program.*, tbl_siswa.id as id_siswa from tbl_siswa left join tbl_program on tbl_siswa.program = tbl_program.id where tbl_siswa.level = 'Siswa' order by nama ASC");
+$query=mysqli_query($conn, "select tbl_siswa.*, tbl_program.*, tbl_siswa.id as id_siswa from tbl_siswa left join tbl_program on tbl_siswa.program = tbl_program.id where tbl_siswa.level = 'Siswa' and tbl_siswa.status='1' order by nama ASC");
 while($row=mysqli_fetch_array($query)){
 ?>
     <!-- STUDENT LIST -->
@@ -183,7 +182,13 @@ while($row=mysqli_fetch_array($query)){
                   Lihat Detail
                 </div>
 				</a>
-                
+				<div class="text-end">
+				 <a href="?page=dataSiswa&edit=<?=$row['id_siswa'];?>" class="text-decoration-none">
+				   <div class="badge-payment badge-status">
+                  Non Aktif
+                </div>
+                </a>
+                </div>
               </div>
 
             </div>

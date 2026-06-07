@@ -135,6 +135,11 @@
       background:#ffe9e9;
       color:#dc3545;
     }
+    
+    .badge-status{
+      background:#8AE234;
+      color:#2E3436;
+    }
 
     .badge-paid{
       background:#e6f8ec;

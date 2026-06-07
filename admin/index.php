@@ -25,7 +25,7 @@ $_SESSION['start_time'] = time();
 <?php } ?>
 
 <?php
-//include '../conn.php';
+include '../assets/modul/head.php';
 include 'load.php';
 ?>
 
